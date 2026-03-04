@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE LIGO_LW SYSTEM "http://ldas-sw.ligo.caltech.edu/doc/ligolwAPI/html/ligolw_dtd.txt"><LIGO_LW>
+   <Table Name="process:table">
+      <Column Name="program" Type="lstring"/>
+      <Column Name="version" Type="lstring"/>
+      <Column Name="cvs_repository" Type="lstring"/>
+      <Column Name="cvs_entry_time" Type="int_4s"/>
+      <Column Name="comment" Type="lstring"/>
+      <Column Name="is_online" Type="int_4s"/>
+      <Column Name="node" Type="lstring"/>
+      <Column Name="username" Type="lstring"/>
+      <Column Name="unix_procid" Type="int_4s"/>
+      <Column Name="start_time" Type="int_4s"/>
+      <Column Name="end_time" Type="int_4s"/>
+      <Column Name="jobid" Type="int_4s"/>
+      <Column Name="domain" Type="lstring"/>
+      <Column Name="ifos" Type="lstring"/>
+      <Column Name="process_id" Type="ilwd:char"/>
+      <Stream Name="process:table" Type="Local" Delimiter=",">
+         "inspinj","80700beac8f3c677b5d7716c9c94c97f2043c0be","CLEAN: All modifications committed",1289248243," ",0,"ldas-pcdev6","45188",2460332,1304039817,1304039817,0,"lalapps","","process:process_id:0"
+      </Stream>
+   </Table>
+   <Table Name="process_params:table">
+      <Column Name="program" Type="lstring"/>
+      <Column Name="process:process_id" Type="ilwd:char"/>
+      <Column Name="param" Type="lstring"/>
+      <Column Name="type" Type="lstring"/>
+      <Column Name="value" Type="lstring"/>
+      <Stream Name="process_params:table" Type="Local" Delimiter=",">
+         "inspinj","process:process_id:0","--gps-start-time","int","1242107269",
+         "inspinj","process:process_id:0","--gps-end-time","int","1242107529",
+         "inspinj","process:process_id:0","--time-step","float","2.000000e+02",
+         "inspinj","process:process_id:0","--m-distr","string","fixMasses",
+         "inspinj","process:process_id:0","--fixed-mass1","float","48.133999",
+         "inspinj","process:process_id:0","--fixed-mass2","float","24.214001",
+         "inspinj","process:process_id:0","--i-distr","string","fixed",
+         "inspinj","process:process_id:0","--fixed-inc","float","1.989134e+00",
+         "inspinj","process:process_id:0","--polarization","float","2.297167e+00",
+         "inspinj","process:process_id:0","--fixed-coa-phase","float","0.000000e+00",
+         "inspinj","process:process_id:0","--l-distr","string","fixed",
+         "inspinj","process:process_id:0","--longitude","float","-2.137889e+00",
+         "inspinj","process:process_id:0","--latitude","float","-2.610140e-01",
+         "inspinj","process:process_id:0","--waveform","string","SEOBNRv4PHM",
+         "inspinj","process:process_id:0","--f-lower","float","10.000000",
+         "inspinj","process:process_id:0","--taper-injection","string","startend",
+         "inspinj","process:process_id:0","--d-distr","string","uniform",
+         "inspinj","process:process_id:0","--min-distance","float","1.127507e+06",
+         "inspinj","process:process_id:0","--max-distance","float","1.127508e+06",
+         "inspinj","process:process_id:0","--enable-spin","string","",
+         "inspinj","process:process_id:0","--min-spin1","float","8.670000e-01",
+         "inspinj","process:process_id:0","--max-spin1","float","8.680000e-01",
+         "inspinj","process:process_id:0","--min-spin2","float","8.680000e-01",
+         "inspinj","process:process_id:0","--max-spin2","float","8.690000e-01",
+         "inspinj","process:process_id:0","--band-pass-injection","string",""
+      </Stream>
+   </Table>
+   <Table Name="sim_inspiral:table">
+      <Column Name="process:process_id" Type="ilwd:char"/>
+      <Column Name="waveform" Type="lstring"/>
+      <Column Name="geocent_end_time" Type="int_4s"/>
+      <Column Name="geocent_end_time_ns" Type="int_4s"/>
+      <Column Name="h_end_time" Type="int_4s"/>
+      <Column Name="h_end_time_ns" Type="int_4s"/>
+      <Column Name="l_end_time" Type="int_4s"/>
+      <Column Name="l_end_time_ns" Type="int_4s"/>
+      <Column Name="g_end_time" Type="int_4s"/>
+      <Column Name="g_end_time_ns" Type="int_4s"/>
+      <Column Name="t_end_time" Type="int_4s"/>
+      <Column Name="t_end_time_ns" Type="int_4s"/>
+      <Column Name="v_end_time" Type="int_4s"/>
+      <Column Name="v_end_time_ns" Type="int_4s"/>
+      <Column Name="end_time_gmst" Type="real_8"/>
+      <Column Name="source" Type="lstring"/>
+      <Column Name="mass1" Type="real_4"/>
+      <Column Name="mass2" Type="real_4"/>
+      <Column Name="mchirp" Type="real_4"/>
+      <Column Name="eta" Type="real_4"/>
+      <Column Name="distance" Type="real_4"/>
+      <Column Name="longitude" Type="real_4"/>
+      <Column Name="latitude" Type="real_4"/>
+      <Column Name="inclination" Type="real_4"/>
+      <Column Name="coa_phase" Type="real_4"/>
+      <Column Name="polarization" Type="real_4"/>
+      <Column Name="psi0" Type="real_4"/>
+      <Column Name="psi3" Type="real_4"/>
+      <Column Name="alpha" Type="real_4"/>
+      <Column Name="alpha1" Type="real_4"/>
+      <Column Name="alpha2" Type="real_4"/>
+      <Column Name="alpha3" Type="real_4"/>
+      <Column Name="alpha4" Type="real_4"/>
+      <Column Name="alpha5" Type="real_4"/>
+      <Column Name="alpha6" Type="real_4"/>
+      <Column Name="beta" Type="real_4"/>
+      <Column Name="spin1x" Type="real_4"/>
+      <Column Name="spin1y" Type="real_4"/>
+      <Column Name="spin1z" Type="real_4"/>
+      <Column Name="spin2x" Type="real_4"/>
+      <Column Name="spin2y" Type="real_4"/>
+      <Column Name="spin2z" Type="real_4"/>
+      <Column Name="theta0" Type="real_4"/>
+      <Column Name="phi0" Type="real_4"/>
+      <Column Name="f_lower" Type="real_4"/>
+      <Column Name="f_final" Type="real_4"/>
+      <Column Name="eff_dist_h" Type="real_4"/>
+      <Column Name="eff_dist_l" Type="real_4"/>
+      <Column Name="eff_dist_g" Type="real_4"/>
+      <Column Name="eff_dist_t" Type="real_4"/>
+      <Column Name="eff_dist_v" Type="real_4"/>
+      <Column Name="numrel_mode_min" Type="int_4s"/>
+      <Column Name="numrel_mode_max" Type="int_4s"/>
+      <Column Name="numrel_data" Type="lstring"/>
+      <Column Name="amp_order" Type="int_4s"/>
+      <Column Name="taper" Type="lstring"/>
+      <Column Name="bandpass" Type="int_4s"/>
+      <Column Name="simulation_id" Type="ilwd:char"/>
+      <Stream Name="sim_inspiral:table" Type="Local" Delimiter=",">
+         "process:process_id:0","SEOBNRv4PHM",1242107269,0,1242107268,992395318,1242107268,985184193,1242107269,5162175,1242107269,15298940,1242107269,4943925,4.4584811434911448e+04,"",4.813400e+01,2.421400e+01,2.937824e+01,2.226719e-01,1.127508e+03,-2.137889e+00,-2.610140e-01,1.989134e+00,2.588639e+00,2.297167e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,6.798091e-01,2.791420e-01,-4.606676e-01,-6.751760e-01,-2.425586e-01,-4.890681e-01,0.000000e+00,0.000000e+00,1.000000e+01,0.000000e+00,4.042869e+03,3.436558e+03,4.307560e+03,2.960218e+03,5.551537e+03,0,0,"",-1,"TAPER_STARTEND",1,"sim_inspiral:simulation_id:0",
+         "process:process_id:0","SEOBNRv4PHM",1242107469,0,1242107468,992276735,1242107468,985155670,1242107469,5345604,1242107469,15129676,1242107469,5160437,4.4584826019143271e+04,"",4.813400e+01,2.421400e+01,2.937824e+01,2.226719e-01,1.127507e+03,-2.137889e+00,-2.610140e-01,1.989134e+00,4.210604e+00,2.297167e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,0.000000e+00,-6.119421e-01,6.139087e-01,-1.893280e-02,1.108736e-01,-6.055782e-02,8.589237e-01,0.000000e+00,0.000000e+00,1.000000e+01,0.000000e+00,4.027828e+03,3.433935e+03,4.339026e+03,2.966845e+03,5.379861e+03,0,0,"",-1,"TAPER_STARTEND",1,"sim_inspiral:simulation_id:1"
+      </Stream>
+   </Table>
+</LIGO_LW>

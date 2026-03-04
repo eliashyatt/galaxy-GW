@@ -1,0 +1,86 @@
+GW190408_181802,1238782700.300
+1238782490,1238782700,1238782750
+69.161,348.154
+267.189,1238782490,1238782750
+0.037,0.356,803765
+ra is greate than 180
+351.993,-8.007
+52.945,52.945
+lalapps_inspinj --gps-start-time 1238782490 --gps-end-time 1238782750 --time-step 200 --m-distr fixMasses --fixed-mass1 29.198 --fixed-mass2 20.186 --i-distr fixed --fixed-inc 69.161 --polarization 267.189 --fixed-coa-phase 348.154 --l-distr fixed --longitude -8.007  --latitude 52.945 --waveform SEOBNRv4PHM --f-lower 10 --taper-injection startend --d-distr uniform --min-distance 803764 --max-distance 803765 --enable-spin --min-spin1 0.036 --max-spin1 0.037 --min-spin2 0.355 --max-spin2 0.356 --band-pass-injection
+lalapp simulation is over
+start check the xml file
+HL-INJECTIONS_1-1238782490-260.xml
+HL-INJECTIONS_1-1238782490-260.xml
+./output_xml_sh/GW190408_181802_10s_before_lalapp.xml
+accepted: 0it [00:00, ?it/s]
+  0%|          | 0/2 [00:00<?, ?it/s][A2021-05-02 17:55:21,932 INFO Selected template: SEOBNRv4PHM
+2021-05-02 17:55:30,946 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:55:31,132 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:55:31,384 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.5 Hz
+accepted: 1it [00:09,  9.64s/it]
+ 50%|█████     | 1/2 [00:09<00:09,  9.64s/it][A2021-05-02 17:55:31,572 INFO Selected template: SEOBNRv4PHM
+2021-05-02 17:55:40,170 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:55:40,363 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:55:40,558 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.5 Hz
+accepted: 2it [00:18,  9.49s/it] 50%|█████     | 1/2 [00:18<00:18, 18.79s/it]
+accepted: 2it [00:18,  9.40s/it]
+2021-05-02 17:55:43,837 INFO Using 4 OpenMP thread(s)
+2021-05-02 17:55:43,837 INFO ./output_xml_sh/bayestar_coinc_GW190408_181802_10s_before_lalapp.xml:reading input files
+2021-05-02 17:55:43,950 WARNING Using anti-FINDCHIRP phase convention; inverting phases. This is currently the default and it is appropriate for gstlal and MBTA but not pycbc as of observing run 1 ("O1"). The default setting is likely to change in the future.
+2021-05-02 17:55:43,951 INFO 0:computing sky map
+2021-05-02 17:55:44,257 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 17:55:44,265 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 17:55:44,273 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 17:55:44,281 INFO Selected template: SEOBNRv4PHM
+2021-05-02 17:55:53,176 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:55:53,181 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:55:53,185 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.5 Hz
+2021-05-02 17:57:37,633 INFO finished computationally-intensive section in real=113.682s, user=423.950s, sys=0.844s
+2021-05-02 17:57:37,718 INFO 0:saving sky map
+2021-05-02 17:57:39,458 INFO 1:computing sky map
+2021-05-02 17:57:39,459 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 17:57:39,467 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 17:57:39,474 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 17:57:39,482 INFO Selected template: SEOBNRv4PHM
+2021-05-02 17:57:48,399 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:57:48,403 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:57:48,406 WARNING Assuming PSD is infinite at 0.0625 Hz because PSD is only sampled down to 0.5 Hz
+2021-05-02 17:59:34,157 INFO finished computationally-intensive section in real=114.698s, user=428.571s, sys=0.785s
+2021-05-02 17:59:34,158 INFO 1:saving sky map
+GW190412,1239082262.181
+1239082052,1239082262,1239082312
+37.760,286.786
+158.491,1239082052,1239082312
+0.459,0.560,742400
+ra is greate than 180
+218.427,-141.573
+36.385,36.385
+lalapps_inspinj --gps-start-time 1239082052 --gps-end-time 1239082312 --time-step 200 --m-distr fixMasses --fixed-mass1 32.787 --fixed-mass2 7.733 --i-distr fixed --fixed-inc 37.760 --polarization 158.491 --fixed-coa-phase 286.786 --l-distr fixed --longitude -141.573  --latitude 36.385 --waveform SEOBNRv4PHM --f-lower 10 --taper-injection startend --d-distr uniform --min-distance 742399 --max-distance 742400 --enable-spin --min-spin1 0.458 --max-spin1 0.459 --min-spin2 0.559 --max-spin2 0.560 --band-pass-injection
+lalapp simulation is over
+start check the xml file
+HL-INJECTIONS_1-1239082052-260.xml
+HL-INJECTIONS_1-1239082052-260.xml
+./output_xml_sh/GW190412_10s_before_lalapp.xml
+accepted: 0it [00:00, ?it/s]
+  0%|          | 0/2 [00:00<?, ?it/s][A2021-05-02 17:59:38,445 INFO Selected template: SEOBNRv4PHM
+2021-05-02 17:59:53,039 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:59:53,377 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 17:59:53,575 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.5 Hz
+accepted: 1it [00:15, 15.32s/it]
+ 50%|█████     | 1/2 [00:15<00:15, 15.32s/it][A2021-05-02 17:59:53,765 INFO Selected template: SEOBNRv4PHM
+2021-05-02 18:00:07,826 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 18:00:08,031 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 18:00:08,233 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.5 Hz
+accepted: 2it [00:29, 15.13s/it] 50%|█████     | 1/2 [00:29<00:29, 29.99s/it]
+accepted: 2it [00:29, 15.00s/it]
+2021-05-02 18:00:11,994 INFO Using 4 OpenMP thread(s)
+2021-05-02 18:00:11,995 INFO ./output_xml_sh/bayestar_coinc_GW190412_10s_before_lalapp.xml:reading input files
+2021-05-02 18:00:12,108 WARNING Using anti-FINDCHIRP phase convention; inverting phases. This is currently the default and it is appropriate for gstlal and MBTA but not pycbc as of observing run 1 ("O1"). The default setting is likely to change in the future.
+2021-05-02 18:00:12,109 INFO 0:computing sky map
+2021-05-02 18:00:12,397 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 18:00:12,405 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 18:00:12,412 WARNING Truncating PSD at 0.95 of maximum frequency to suppress rolloff artifacts. This option may be removed in the future.
+2021-05-02 18:00:12,420 INFO Selected template: SEOBNRv4PHM
+2021-05-02 18:00:26,030 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 18:00:26,037 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.25 Hz
+2021-05-02 18:00:26,043 WARNING Assuming PSD is infinite at 0.03125 Hz because PSD is only sampled down to 0.5 Hz
