@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE LIGO_LW SYSTEM "http://ldas-sw.ligo.caltech.edu/doc/ligolwAPI/html/ligolw_dtd.txt">
+<LIGO_LW>
+	<Table Name="coinc_definer:table">
+		<Column Name="coinc_def_id" Type="int_8s"/>
+		<Column Name="description" Type="lstring"/>
+		<Column Name="search" Type="lstring"/>
+		<Column Name="search_coinc_type" Type="int_4u"/>
+		<Stream Name="coinc_definer:table" Delimiter="," Type="Local">
+			0,"sngl_inspiral&lt;--&gt;sngl_inspiral coincidences","inspiral",0,
+			1,"sim_inspiral&lt;--&gt;coinc_event coincidences (exact)","inspiral",3
+		</Stream>
+	</Table>
+	<Table Name="coinc_inspiral:table">
+		<Column Name="coinc_event:coinc_event_id" Type="int_8s"/>
+		<Column Name="combined_far" Type="real_8"/>
+		<Column Name="end_time" Type="int_4s"/>
+		<Column Name="end_time_ns" Type="int_4s"/>
+		<Column Name="false_alarm_rate" Type="real_8"/>
+		<Column Name="ifos" Type="lstring"/>
+		<Column Name="mass" Type="real_8"/>
+		<Column Name="mchirp" Type="real_8"/>
+		<Column Name="minimum_duration" Type="real_8"/>
+		<Column Name="snr" Type="real_8"/>
+		<Stream Name="coinc_inspiral:table" Delimiter="," Type="Local">
+		</Stream>
+	</Table>
+	<Table Name="coinc_event_map:table">
+		<Column Name="coinc_event:coinc_event_id" Type="int_8s"/>
+		<Column Name="event_id" Type="int_8s"/>
+		<Column Name="table_name" Type="char_v"/>
+		<Stream Name="coinc_event_map:table" Delimiter="," Type="Local">
+		</Stream>
+	</Table>
+	<Table Name="coinc_event:table">
+		<Column Name="coinc_definer:coinc_def_id" Type="int_8s"/>
+		<Column Name="coinc_event_id" Type="int_8s"/>
+		<Column Name="instruments" Type="lstring"/>
+		<Column Name="likelihood" Type="real_8"/>
+		<Column Name="nevents" Type="int_4u"/>
+		<Column Name="process:process_id" Type="int_8s"/>
+		<Column Name="time_slide:time_slide_id" Type="int_8s"/>
+		<Stream Name="coinc_event:table" Delimiter="," Type="Local">
+		</Stream>
+	</Table>
+	<Table Name="process_params:table">
+		<Column Name="program" Type="lstring"/>
+		<Column Name="process:process_id" Type="int_8s"/>
+		<Column Name="param" Type="lstring"/>
+		<Column Name="type" Type="lstring"/>
+		<Column Name="value" Type="lstring"/>
+		<Stream Name="process_params:table" Type="Local" Delimiter=",">
+			"inspinj",0,"--gps-start-time","int","1243254338",
+			"inspinj",0,"--gps-end-time","int","1243254598",
+			"inspinj",0,"--time-step","float","2.000000e+02",
+			"inspinj",0,"--m-distr","string","fixMasses",
+			"inspinj",0,"--fixed-mass1","float","52.000000",
+			"inspinj",0,"--fixed-mass2","float","15.000000",
+			"inspinj",0,"--i-distr","string","fixed",
+			"inspinj",0,"--fixed-inc","float","1.564415e+00",
+			"inspinj",0,"--polarization","float","3.213737e+00",
+			"inspinj",0,"--fixed-coa-phase","float","1.355260e+02",
+			"inspinj",0,"--l-distr","string","fixed",
+			"inspinj",0,"--longitude","float","-1.769653e+00",
+			"inspinj",0,"--latitude","float","-9.514201e-01",
+			"inspinj",0,"--waveform","string","SEOBNRv4PHM",
+			"inspinj",0,"--f-lower","float","10.000000",
+			"inspinj",0,"--taper-injection","string","startend",
+			"inspinj",0,"--d-distr","string","uniform",
+			"inspinj",0,"--min-distance","float","1.232000e+06",
+			"inspinj",0,"--max-distance","float","1.232001e+06",
+			"inspinj",0,"--enable-spin","string","",
+			"inspinj",0,"--min-spin1","float","5.623100e-01",
+			"inspinj",0,"--max-spin1","float","5.630000e-01",
+			"inspinj",0,"--min-spin2","float","5.432000e-01",
+			"inspinj",0,"--max-spin2","float","5.440000e-01",
+			"inspinj",0,"--band-pass-injection","string","",
+			"bayestar-realize-coincs",1,"--loglevel","lstring","INFO",
+			"bayestar-realize-coincs",1,"--input","lstring","./output_xml_sh/GW4_10s_before_lalapp.xml",
+			"bayestar-realize-coincs",1,"--output","lstring","./output_xml_sh/bayestar_coinc_GW4_10s_before_lalapp.xml",
+			"bayestar-realize-coincs",1,"--jobs","int_8s","1",
+			"bayestar-realize-coincs",1,"--detector","lstring","H1",
+			"bayestar-realize-coincs",1,"--detector","lstring","L1",
+			"bayestar-realize-coincs",1,"--detector","lstring","V1",
+			"bayestar-realize-coincs",1,"--snr-threshold","real_8","4",
+			"bayestar-realize-coincs",1,"--net-snr-threshold","real_8","8",
+			"bayestar-realize-coincs",1,"--keep-subthreshold",,,
+			"bayestar-realize-coincs",1,"--min-triggers","int_8s","2",
+			"bayestar-realize-coincs",1,"--min-distance","real_8","0",
+			"bayestar-realize-coincs",1,"--max-distance","real_8","inf",
+			"bayestar-realize-coincs",1,"--measurement-error","lstring","gaussian-noise",
+			"bayestar-realize-coincs",1,"--enable-snr-series",,,
+			"bayestar-realize-coincs",1,"--reference-psd","lstring","./psd/test.xml",
+			"bayestar-realize-coincs",1,"--duty-cycle","real_8","1",
+			"bayestar-realize-coincs",1,"--preserve-ids",,,
+		</Stream>
+	</Table>
+	<Table Name="process:table">
+		<Column Name="program" Type="lstring"/>
+		<Column Name="version" Type="lstring"/>
+		<Column Name="cvs_repository" Type="lstring"/>
+		<Column Name="cvs_entry_time" Type="int_4s"/>
+		<Column Name="comment" Type="lstring"/>
+		<Column Name="is_online" Type="int_4s"/>
+		<Column Name="node" Type="lstring"/>
+		<Column Name="username" Type="lstring"/>
+		<Column Name="unix_procid" Type="int_4s"/>
+		<Column Name="start_time" Type="int_4s"/>
+		<Column Name="end_time" Type="int_4s"/>
+		<Column Name="jobid" Type="int_4s"/>
+		<Column Name="domain" Type="lstring"/>
+		<Column Name="ifos" Type="lstring"/>
+		<Column Name="process_id" Type="int_8s"/>
+		<Stream Name="process:table" Type="Local" Delimiter=",">
+			"inspinj","a52a1a805553e98e90243b647cd36c386bf601e6","CLEAN: All modifications committed",1408201859," ",0,"Linux","vboxuser",12647,1459801269,1459801269,0,"lalapps","",0,
+			"bayestar-realize-coincs","ligo.skymap 2.3.0",,,"Simulated coincidences",0,"Linux","vboxuser",12652,1459801270,1459801275,0,,"H1,L1,V1",1
+		</Stream>
+	</Table>
+	<Table Name="sim_inspiral:table">
+		<Column Name="alpha" Type="real_4"/>
+		<Column Name="alpha1" Type="real_4"/>
+		<Column Name="alpha2" Type="real_4"/>
+		<Column Name="alpha3" Type="real_4"/>
+		<Column Name="alpha4" Type="real_4"/>
+		<Column Name="alpha5" Type="real_4"/>
+		<Column Name="alpha6" Type="real_4"/>
+		<Column Name="amp_order" Type="int_4s"/>
+		<Column Name="bandpass" Type="int_4s"/>
+		<Column Name="beta" Type="real_4"/>
+		<Column Name="coa_phase" Type="real_4"/>
+		<Column Name="distance" Type="real_4"/>
+		<Column Name="eff_dist_g" Type="real_4"/>
+		<Column Name="eff_dist_h" Type="real_4"/>
+		<Column Name="eff_dist_l" Type="real_4"/>
+		<Column Name="eff_dist_t" Type="real_4"/>
+		<Column Name="eff_dist_v" Type="real_4"/>
+		<Column Name="end_time_gmst" Type="real_8"/>
+		<Column Name="eta" Type="real_4"/>
+		<Column Name="f_final" Type="real_4"/>
+		<Column Name="f_lower" Type="real_4"/>
+		<Column Name="g_end_time" Type="int_4s"/>
+		<Column Name="g_end_time_ns" Type="int_4s"/>
+		<Column Name="geocent_end_time" Type="int_4s"/>
+		<Column Name="geocent_end_time_ns" Type="int_4s"/>
+		<Column Name="h_end_time" Type="int_4s"/>
+		<Column Name="h_end_time_ns" Type="int_4s"/>
+		<Column Name="inclination" Type="real_4"/>
+		<Column Name="l_end_time" Type="int_4s"/>
+		<Column Name="l_end_time_ns" Type="int_4s"/>
+		<Column Name="latitude" Type="real_4"/>
+		<Column Name="longitude" Type="real_4"/>
+		<Column Name="mass1" Type="real_4"/>
+		<Column Name="mass2" Type="real_4"/>
+		<Column Name="mchirp" Type="real_4"/>
+		<Column Name="numrel_data" Type="lstring"/>
+		<Column Name="numrel_mode_max" Type="int_4s"/>
+		<Column Name="numrel_mode_min" Type="int_4s"/>
+		<Column Name="phi0" Type="real_4"/>
+		<Column Name="polarization" Type="real_4"/>
+		<Column Name="process:process_id" Type="int_8s"/>
+		<Column Name="psi0" Type="real_4"/>
+		<Column Name="psi3" Type="real_4"/>
+		<Column Name="simulation_id" Type="int_8s"/>
+		<Column Name="source" Type="lstring"/>
+		<Column Name="spin1x" Type="real_4"/>
+		<Column Name="spin1y" Type="real_4"/>
+		<Column Name="spin1z" Type="real_4"/>
+		<Column Name="spin2x" Type="real_4"/>
+		<Column Name="spin2y" Type="real_4"/>
+		<Column Name="spin2z" Type="real_4"/>
+		<Column Name="t_end_time" Type="int_4s"/>
+		<Column Name="t_end_time_ns" Type="int_4s"/>
+		<Column Name="taper" Type="lstring"/>
+		<Column Name="theta0" Type="real_4"/>
+		<Column Name="v_end_time" Type="int_4s"/>
+		<Column Name="v_end_time_ns" Type="int_4s"/>
+		<Column Name="waveform" Type="lstring"/>
+		<Stream Name="sim_inspiral:table" Delimiter="," Type="Local">
+		</Stream>
+	</Table>
+	<Table Name="sngl_inspiral:table">
+		<Column Name="Gamma0" Type="real_4"/>
+		<Column Name="Gamma1" Type="real_4"/>
+		<Column Name="Gamma2" Type="real_4"/>
+		<Column Name="Gamma3" Type="real_4"/>
+		<Column Name="Gamma4" Type="real_4"/>
+		<Column Name="Gamma5" Type="real_4"/>
+		<Column Name="Gamma6" Type="real_4"/>
+		<Column Name="Gamma7" Type="real_4"/>
+		<Column Name="Gamma8" Type="real_4"/>
+		<Column Name="Gamma9" Type="real_4"/>
+		<Column Name="alpha" Type="real_4"/>
+		<Column Name="alpha1" Type="real_4"/>
+		<Column Name="alpha2" Type="real_4"/>
+		<Column Name="alpha3" Type="real_4"/>
+		<Column Name="alpha4" Type="real_4"/>
+		<Column Name="alpha5" Type="real_4"/>
+		<Column Name="alpha6" Type="real_4"/>
+		<Column Name="amplitude" Type="real_4"/>
+		<Column Name="bank_chisq" Type="real_4"/>
+		<Column Name="bank_chisq_dof" Type="int_4s"/>
+		<Column Name="beta" Type="real_4"/>
+		<Column Name="channel" Type="lstring"/>
+		<Column Name="chi" Type="real_4"/>
+		<Column Name="chisq" Type="real_4"/>
+		<Column Name="chisq_dof" Type="int_4s"/>
+		<Column Name="coa_phase" Type="real_4"/>
+		<Column Name="cont_chisq" Type="real_4"/>
+		<Column Name="cont_chisq_dof" Type="int_4s"/>
+		<Column Name="eff_distance" Type="real_4"/>
+		<Column Name="end_time" Type="int_4s"/>
+		<Column Name="end_time_gmst" Type="real_8"/>
+		<Column Name="end_time_ns" Type="int_4s"/>
+		<Column Name="eta" Type="real_4"/>
+		<Column Name="event_duration" Type="real_8"/>
+		<Column Name="event_id" Type="int_8s"/>
+		<Column Name="f_final" Type="real_4"/>
+		<Column Name="ifo" Type="lstring"/>
+		<Column Name="impulse_time" Type="int_4s"/>
+		<Column Name="impulse_time_ns" Type="int_4s"/>
+		<Column Name="kappa" Type="real_4"/>
+		<Column Name="mass1" Type="real_4"/>
+		<Column Name="mass2" Type="real_4"/>
+		<Column Name="mchirp" Type="real_4"/>
+		<Column Name="mtotal" Type="real_4"/>
+		<Column Name="process:process_id" Type="int_8s"/>
+		<Column Name="psi0" Type="real_4"/>
+		<Column Name="psi3" Type="real_4"/>
+		<Column Name="rsqveto_duration" Type="real_4"/>
+		<Column Name="search" Type="lstring"/>
+		<Column Name="sigmasq" Type="real_8"/>
+		<Column Name="snr" Type="real_4"/>
+		<Column Name="spin1x" Type="real_4"/>
+		<Column Name="spin1y" Type="real_4"/>
+		<Column Name="spin1z" Type="real_4"/>
+		<Column Name="spin2x" Type="real_4"/>
+		<Column Name="spin2y" Type="real_4"/>
+		<Column Name="spin2z" Type="real_4"/>
+		<Column Name="tau0" Type="real_4"/>
+		<Column Name="tau2" Type="real_4"/>
+		<Column Name="tau3" Type="real_4"/>
+		<Column Name="tau4" Type="real_4"/>
+		<Column Name="tau5" Type="real_4"/>
+		<Column Name="template_duration" Type="real_8"/>
+		<Column Name="ttotal" Type="real_4"/>
+		<Stream Name="sngl_inspiral:table" Delimiter="," Type="Local">
+		</Stream>
+	</Table>
+	<Table Name="time_slide:table">
+		<Column Name="instrument" Type="lstring"/>
+		<Column Name="offset" Type="real_8"/>
+		<Column Name="process:process_id" Type="int_8s"/>
+		<Column Name="time_slide_id" Type="int_8s"/>
+		<Stream Name="time_slide:table" Delimiter="," Type="Local">
+			"H1",0,1,0,
+			"L1",0,1,0,
+			"V1",0,1,0
+		</Stream>
+	</Table>
+	<Table Name="search_summary:table">
+		<Column Name="comment" Type="lstring"/>
+		<Column Name="ifos" Type="lstring"/>
+		<Column Name="in_end_time" Type="int_4s"/>
+		<Column Name="in_end_time_ns" Type="int_4s"/>
+		<Column Name="in_start_time" Type="int_4s"/>
+		<Column Name="in_start_time_ns" Type="int_4s"/>
+		<Column Name="lal_cvs_tag" Type="lstring"/>
+		<Column Name="lalwrapper_cvs_tag" Type="lstring"/>
+		<Column Name="nevents" Type="int_4s"/>
+		<Column Name="nnodes" Type="int_4s"/>
+		<Column Name="out_end_time" Type="int_4s"/>
+		<Column Name="out_end_time_ns" Type="int_4s"/>
+		<Column Name="out_start_time" Type="int_4s"/>
+		<Column Name="out_start_time_ns" Type="int_4s"/>
+		<Column Name="process:process_id" Type="int_8s"/>
+		<Column Name="shared_object" Type="lstring"/>
+		<Stream Name="search_summary:table" Delimiter="," Type="Local">
+			"Simulated coincidences","H1,L1,V1",2000000000,0,0,0,"","",0,1,2000000000,0,0,0,1,"standalone"
+		</Stream>
+	</Table>
+</LIGO_LW>
