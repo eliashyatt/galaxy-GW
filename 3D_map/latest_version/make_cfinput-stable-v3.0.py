@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# Usage example: ./make_cfinput.py --map cumulative_reduced3Dmap-32.npz --distance_step 1 --verbose --cmp YlOrBr --npoints 10000 --plot3D --plot2D --plotsphere
+# Usage example: python make_cfinput-stable-v3.0.py --verbose --map cumulative_reduced3Dmap-256nside-2000max-5.0step.npz --distance_step 5 --npoints 100000 --sampling dist --plotspherical --plotwedge 90
 
 import matplotlib as mpl
 mpl.use('Agg')
@@ -20,7 +20,7 @@ import gc
 
 
 def read_data():
-	global number_pixel, distance_bin_number, distance_bins, distance_step, dim
+	global number_pixel, distance_bin_number, distance_bins, distance_step, distance_max, dim
 	global nside
 
 	data = np.load(args.map)['cumulative_reduced3Dmap']
@@ -47,19 +47,25 @@ def read_data():
 
 
 @njit(fastmath=True,error_model='numpy',parallel=True)
-def select_data(data, npoints):
+def select_data(data, npoints, sampling):
 	flattened_data = data[:,1:].T.flatten()
-	distances = np.empty(dim)
-	for n in prange(distance_bin_number):
-		distances[n*number_pixel:(n+1)*number_pixel] = n*distance_step
+	
+	#distances = np.empty(dim)
+	#for n in prange(distance_bin_number):
+	#	distances[n*number_pixel:(n+1)*number_pixel] = n*distance_step
+	distances = np.repeat(np.arange(distance_bin_number) * distance_step, number_pixel)
 
-	# Normalize to get a probability distribution
 	total = np.sum(flattened_data)
 	probabilities = flattened_data / total
 
-	# Sample npoints indices according to the density distribution
-	selected_points = np.searchsorted(np.cumsum(probabilities), np.random.random(npoints))
-
+	if sampling > 0:
+	    cdf = np.cumsum(probabilities)
+	    cdf /= cdf[-1]
+	    selected_points = np.searchsorted(cdf,np.random.random(npoints))
+	else:
+	    npoints = min(npoints, len(flattened_data))
+	    selected_points = np.argpartition(-flattened_data,npoints - 1)[:npoints]
+		
 	selected_weights = flattened_data[selected_points]
 	selected_distances = distances[selected_points]
 	selected_points = selected_points % number_pixel
@@ -91,7 +97,7 @@ def plot3Dmap(ras, decs, zs, weights):
 	cm = plt.get_cmap(args.cmp)
 		
 	if args.verbose:
-		print('Plotting the 3D map (cumulative_3Dmap_rdz-nside.png). It may take a while.')
+		print('Plotting the reduced 3D map (cumulative_3Dreducedmap-nside-max-step-points.png). It may take a while.')
 		
 	color_norm = mpl.colors.LogNorm(vmin=np.min(weights),vmax=np.max(weights))	
 	colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=color_norm, cmap=args.cmp),ax=ax3D)
@@ -110,7 +116,7 @@ def plot3Dmap(ras, decs, zs, weights):
 	ax3D.set_xlabel('R.A. (rad)', fontsize=16)
 	ax3D.set_ylabel('cos(dec)', fontsize=16)#('dec (rad)', fontsize=16)
 		
-	plt.savefig('cumulative_3Dmap_rdz-'+str(nside)+'-'+str(args.npoints)+'.png')
+	plt.savefig('cumulative_3Dreducedmap-'+str(nside)+'-'+str(distance_max)+'-'+str(distance_step)+'-'+str(args.npoints)+'.png')
 	plt.close()
 
 @njit(fastmath=True,error_model='numpy',parallel=True) 
@@ -127,7 +133,7 @@ def plot2Dmap(ras, decs, zs, weights):
 	cm = plt.get_cmap(args.cmp)
 		
 	if args.verbose:
-		print('Plotting the 2D map (cumulative_2Dmap_rdz-nside.png). It may take a while.')
+		print('Plotting the reduced 2D map (cumulative_2Dreducedmap-nside-max-step-npoints.png). It may take a while.')
 		
 	color_norm = mpl.colors.LogNorm(vmin=np.min(weights),vmax=np.max(weights))	
 	colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=color_norm, cmap=args.cmp),ax=ax2D)
@@ -155,7 +161,7 @@ def plot2Dmap(ras, decs, zs, weights):
 	ax2D.set_xlabel('R.A. (rad)', fontsize=16)
 	ax2D.set_ylabel('cos(dec)', fontsize=16)#('dec (rad)', fontsize=16)
 		
-	plt.savefig('cumulative_2Dmap_rdz-'+str(nside)+'-'+str(args.npoints)+'.png')
+	plt.savefig('cumulative_2Dreducedmap-'+str(nside)+'-'+str(distance_max)+'-'+str(distance_step)+'-'+str(args.npoints)+'.png')
 	plt.close()
 
 def plotspheremap(ras, decs, zs, weights):
@@ -165,7 +171,7 @@ def plotspheremap(ras, decs, zs, weights):
 	cm = plt.get_cmap(args.cmp)
 		
 	if args.verbose:
-		print('Plotting the map on a sphere (cumulative_spheremap_rdz-nside-npoints.png). It may take a while.')
+		print('Plotting the reduced map on a sphere (cumulative_spherereducedmap-nside-max-step-npoints.png). It may take a while.')
 		
 	color_norm = mpl.colors.LogNorm(vmin=np.min(weights),vmax=np.max(weights))	
 	colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=color_norm, cmap=args.cmp),ax=axsphere)
@@ -194,49 +200,97 @@ def plotspheremap(ras, decs, zs, weights):
 	#axsphere.set_xlabel('R.A. (rad)', fontsize=16)
 	#axsphere.set_ylabel('cos(dec)', fontsize=16)#('dec (rad)', fontsize=16)
 		
-	plt.savefig('cumulative_spheremap_rdz-'+str(nside)+'-'+str(args.npoints)+'.png')
+	plt.savefig('cumulative_spherereducedmap-'+str(nside)+'-'+str(distance_max)+'-'+str(distance_step)+'-'+str(args.npoints)+'.png')
 	plt.close()
 
 def plotsphericalmap(ras, decs, distances, weights):
 
 	fig = plt.figure(figsize=(12, 12))
-	axsphere = fig.add_subplot(projection='3d')		
+	axspherical = fig.add_subplot(projection='3d')		
 	cm = plt.get_cmap(args.cmp)
 		
 	if args.verbose:
-		print('Plotting the spherical map (cumulative_sphericalmap_rdz-nside-npoints.png). It may take a while.')
+		print('Plotting the reduced spherical map (cumulative_sphericalreducedmap-nside-max-step-npoints.png). It may take a while.')
 		
 	color_norm = mpl.colors.LogNorm(vmin=np.min(weights),vmax=np.max(weights))	
-	colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=color_norm, cmap=args.cmp),ax=axsphere)
+	colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=color_norm, cmap=args.cmp),ax=axspherical)
 	colorbar.ax.set_ylim(np.min(weights),np.max(weights))
 	
-	alpha = 0.05*(distances-np.min(distances))/(np.max(distances)-np.min(distances))
-	
-	if np.isnan(alpha).any():
-		alpha = 1
-		print('Warning! Using alpha = 1 for the sphere map (all points are on a shell at fixed z).')
-	
-	size = 1 # 10**(3*(zs-np.max(zs))/(np.min(zs)-np.max(zs)))
-
-	#if np.isnan(size).any():
-	#	size = 1
-	#	print('Warning! Using size = 1 for the sphere map  (all points are on a shell at fixed z).')
-
 	color = (weights-np.min(weights))/(np.max(weights)-np.min(weights))
 
 	x,y,z = spheric2cartesian(decs,ras) * distances
-	scatter = axsphere.scatter(x,y,z, c=color, s=size, marker=',', cmap=cm, alpha=alpha,zorder=-np.mean(distances))
+	
+	
+	mask = ((x >= -distance_max/np.sqrt(2)) & (x <= distance_max/np.sqrt(2)) &(y >= -distance_max/np.sqrt(2)) & (y <= distance_max/np.sqrt(2)) \
+		&(z >= -distance_max/np.sqrt(2)) & (z <= distance_max/np.sqrt(2)))
+	x = x[mask]
+	y = y[mask]
+	z = z[mask]
+	weights = weights[mask]
+	color = color[mask]
+	distances = distances[mask]
+
+	alpha = 0.5*(distances-np.min(distances))/(np.max(distances)-np.min(distances))	
+	if np.isnan(alpha).any():
+		alpha = 1
+		print('Warning! Using alpha = 1 for the spherical map.')
+		
+	size = 2
+	scatter = axspherical.scatter(x,y,z, c=color, s=size, marker=',', cmap=cm, alpha=alpha,zorder=-np.mean(distances))
+
+#	size = 6
+#	scatter = axspherical.scatter(x,y,z,c=color,s=size,marker='o',cmap=cm,alpha=0.25,linewidths=0)
+
 	
 	rgba = [0,0,0,0]
-	#axsphere.set_xlim(-1,1)
-	#axsphere.set_ylim(-1,1)
+	axspherical.set_xlim(-distance_max/np.sqrt(2),distance_max/np.sqrt(2))
+	axspherical.set_ylim(-distance_max/np.sqrt(2),distance_max/np.sqrt(2))
+	axspherical.set_zlim(-distance_max/np.sqrt(2),distance_max/np.sqrt(2))
+	
 	#axsphere.set_xlabel('R.A. (rad)', fontsize=16)
 	#axsphere.set_ylabel('cos(dec)', fontsize=16)#('dec (rad)', fontsize=16)
 		
-	plt.savefig('cumulative_sphericalmap_rdz-'+str(nside)+'-'+str(args.npoints)+'.png')
+	plt.savefig('cumulative_sphericalreducedmap-'+str(nside)+'-'+str(distance_max)+'-'+str(distance_step)+'-'+str(args.npoints)+'.png')
 	plt.close()
 
 
+def plotwedgemap(data):
+
+    if args.verbose:
+        print('Plotting full wedge map...')
+
+    angular_resolution = 361
+    theta_values = np.linspace(0, np.pi, angular_resolution, endpoint=True)
+
+    selected_pix = hp.pixelfunc.ang2pix(nside,theta_values,args.plotwedge * np.pi / 180,nest=True,lonlat=False)
+
+    r_values = np.arange(distance_bin_number) * distance_step
+
+    # data[:, 1:] is assumed (skip first column)
+    data_slice = data[:, 1:]  # shape: (npix, nbins)
+
+    # result shape: (nbins, angular_resolution)
+    selected_col = data_slice[selected_pix, :].T
+
+
+    fig = plt.figure(figsize=(24, 24))
+    ax = fig.add_subplot(projection='polar')
+
+    cmap = plt.get_cmap(args.cmp)
+
+    for n in range(distance_bin_number):
+        ax.scatter(theta_values,np.full_like(theta_values, r_values[n]),c=selected_col[n],marker='.',cmap=cmap,alpha=args.alpha)
+
+    ax.set_thetamin(0)
+    ax.set_thetamax(180)
+    ax.tick_params(axis='both', which='major', labelsize=24)
+
+    plt.title(f'Slice at longitude {args.plotwedge}$^\\circ$ degrees',fontsize=36)
+
+    plt.savefig(
+        f'cumulative_wedgefullmap-{nside}-{distance_max}-{distance_step}-'
+        f'{args.npoints}-{str(args.plotwedge).replace(".","d")}deg.png')
+    plt.close()
 		
 		
 if __name__ == "__main__":
@@ -255,7 +309,8 @@ if __name__ == "__main__":
 	parser.add_argument('--plotsphere', help='Plots the map on a sphere. Default: NO', action='count')
 	parser.add_argument('--plotspherical', help='Plots the 3D map in spherical coordinates. Default: NO', action='count')
 	parser.add_argument('--save', help='Saves the input file.', action='count')
-	
+	parser.add_argument('--sampling', help='Point sampling scheme (dist or max). Default: max', required=False, default='max')
+	parser.add_argument('--plotwedge',nargs='?',type=float, const=60, default=None, help='Plot wedge slice at given longitude (degrees). If used without a value, defaults to 60.')	
 	args = parser.parse_args()
 	
 	if args.verbose:
@@ -269,8 +324,13 @@ if __name__ == "__main__":
 		
 	if args.verbose:
 		print('Selecting ' + str(args.npoints) + ' pixels according to the weight probability distribution ('+str(np.round(args.npoints/dim*100,1))+'% of the total).')
+
+	if args.sampling == 'dist':
+		sampling = 1 
+	else:
+		sampling = 0
 	
-	points, distances, weights = select_data(data,args.npoints)
+	points, distances, weights = select_data(data,args.npoints,sampling)
 	
 	if args.verbose:
 		print('Computing coordinates and redshifts.')
@@ -298,5 +358,9 @@ if __name__ == "__main__":
 
 	if args.plotspherical:
 		plotsphericalmap(ras, decs, distances, weights)
+
+	if args.plotwedge:
+		plotwedgemap(data)
+
 
 sys.exit()
