@@ -24,45 +24,6 @@
       "unit": null
     }
   },
-  "redshift": {
-    "__prior__": true,
-    "__module__": "bilby.gw.prior",
-    "__name__": "UniformSourceFrame",
-    "kwargs": {
-      "minimum": 0.001,
-      "maximum": 2.0,
-      "cosmology": {
-        "H0": {
-          "__astropy_quantity__": true,
-          "value": 67.74,
-          "unit": "km / (Mpc s)"
-        },
-        "Om0": 0.3075,
-        "Tcmb0": {
-          "__astropy_quantity__": true,
-          "value": 2.7255,
-          "unit": "K"
-        },
-        "Neff": 3.046,
-        "m_nu": {
-          "__astropy_quantity__": true,
-          "value": [
-            0.0,
-            0.0,
-            0.06
-          ],
-          "unit": "eV"
-        },
-        "Ob0": 0.0486,
-        "__cosmology__": true,
-        "__name__": "FlatLambdaCDM"
-      },
-      "name": "redshift",
-      "latex_label": "$z$",
-      "unit": null,
-      "boundary": null
-    }
-  },
   "mass_1_source": {
     "__prior__": true,
     "__module__": "bilby.core.prior.interpolated",
@@ -11227,33 +11188,7 @@
       "boundary": "periodic"
     }
   },
-  "dec": {
-    "__prior__": true,
-    "__module__": "bilby.core.prior.analytical",
-    "__name__": "Cosine",
-    "kwargs": {
-      "minimum": -1.5707963267948966,
-      "maximum": 1.5707963267948966,
-      "name": "dec",
-      "latex_label": "$\\mathrm{DEC}$",
-      "unit": null,
-      "boundary": null
-    }
-  },
-  "ra": {
-    "__prior__": true,
-    "__module__": "bilby.core.prior.analytical",
-    "__name__": "Uniform",
-    "kwargs": {
-      "minimum": 0,
-      "maximum": 6.283185307179586,
-      "name": "ra",
-      "latex_label": "$\\mathrm{RA}$",
-      "unit": null,
-      "boundary": "periodic"
-    }
-  },
-  "theta_jn": {
+    "theta_jn": {
     "__prior__": true,
     "__module__": "bilby.core.prior.analytical",
     "__name__": "Sine",

@@ -20,14 +20,14 @@ Real_90 =[]
 Inj_10s_before_50 =[]
 Inj_10s_before_90 =[]
 
-print(os.listdir("skymaps/"))
+#print(os.listdir("skymaps/"))
 
 #for fin in os.listdir("skymaps/10s_before/"):
-for fin in os.listdir("skymaps/"):
+for fin in os.listdir("skymaps/the_test_ten/"):
     if fin.endswith(".fits"):
         
         print (fin)
-        f = "skymaps/"+fin
+        f = "skymaps/the_test_ten/"+fin
         event = fin[0:len(fin)-5] # before
 #    event = fin[0:len(fin)-22] # before
         print (event)
@@ -63,6 +63,6 @@ for fin in os.listdir("skymaps/"):
         ax.grid()
         ax.set_title(event,fontsize=8)
         plot.outline_text(ax)
-        plt.savefig('./skymaps_plot/'+event+".png")
+        plt.savefig('./skymaps_plot/the_test_ten/'+event+".png")
         plt.close()
 

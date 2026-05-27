@@ -20,7 +20,7 @@ Real_90 =[]
 Inj_10s_before_50 =[]
 Inj_10s_before_90 =[]
 
-print(os.listdir("skymaps/"))
+#print(os.listdir("skymaps/"))
 
 #for fin in os.listdir("skymaps/10s_before/"):
 for fin in os.listdir("skymaps/"):
