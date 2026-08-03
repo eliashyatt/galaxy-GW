@@ -114,10 +114,14 @@ def select_data(data, npoints, sampling):
 		selected_points = np.searchsorted(cdf, r)
 
 		selected_points = nz_idx[selected_points]
+		selected_weights = flattened_data[selected_points]
+		selected_distances = distances[selected_points]
 
 	elif sampling == 2:   #random
 
 		selected_points = np.random.randint(0, len(flattened_data), npoints)
+		selected_weights = flattened_data[selected_points]
+		selected_distances = distances[selected_points]
 
 	elif sampling == 3:   #distance
 
@@ -170,8 +174,8 @@ def select_data(data, npoints, sampling):
 			idx += len(selected_points)
 
 		selected_points = selected_pix[:idx]
-		#selected_distances = selected_distances[:idx]
-		#selected_weights = selected_weights[:idx]
+		selected_distances = selected_distances[:idx]
+		selected_weights = selected_weights[:idx]
 
 	elif sampling == 4 or sampling == 5:    #div_dist or div_max
 
@@ -208,17 +212,19 @@ def select_data(data, npoints, sampling):
 			idx += len(selected_points)
 
 		selected_points = selected_pix[:idx]
-		#selected_distances = selected_distances[:idx]
-		#selected_weights = selected_weights[:idx]
+		selected_distances = selected_distances[:idx]
+		selected_weights = selected_weights[:idx]
 
 	else:    #max
 
 		npoints = min(npoints, flattened_data.shape[0])
 
 		selected_points = np.argpartition(-flattened_data, npoints - 1)[:npoints]
+		selected_weights = flattened_data[selected_points]
+		selected_distances = distances[selected_points]
 
-	selected_weights = flattened_data[selected_points]
-	selected_distances = distances[selected_points]
+	#selected_weights = flattened_data[selected_points]
+	#selected_distances = distances[selected_points]
 
 	return selected_points % n_pix, selected_distances, selected_weights
 
