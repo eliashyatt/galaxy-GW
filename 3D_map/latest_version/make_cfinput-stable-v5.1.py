@@ -47,7 +47,7 @@ def read_data():
 	
 	parameters = args.map.split('-')
 	distance_max = int(parameters[2][:-3])
-	distance_step = int(parameters[3][:-11])
+	distance_step = int(parameters[3][:-8])
 	distance_bin_number = distance_max/distance_step
 	
 	if not distance_bin_number.is_integer():

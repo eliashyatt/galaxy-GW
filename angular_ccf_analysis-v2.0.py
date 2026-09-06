@@ -65,7 +65,7 @@ def gaussian(x, A, mu, sigma):
 
 
 def find_z_means():
-    GW_df = pd.read_csv('all_GW_sources.csv')
+    GW_df = pd.read_csv('GW_inj_parameters/2700_GW_sources.csv')
     z_means = []
     for i in range(d_L_bin_num):
         d_L_min = luminosity_bin_min + i * luminosity_bin_size
