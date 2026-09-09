@@ -1,7 +1,7 @@
 # Procedure  
 
 ## Generating skymaps
-1. Run `get_inj_params.py` with a command like ```python get_inj_params.py --N 1000``` where N = 10x the number of skymaps wanted since depending on the detector settings, only about 1/10 of the injections will generate skymaps. This will create a csv file with the name `inj_parameters_{N}.csv` using parameters from the file `BBH_15_parameters_O4_prior.json` and distance and sky location from `filtered_GW_sources.csv` which has GW sources up to 1400 Mpc (lum_dist)
+1. Run `get_inj_params.py` with a command like ```python get_inj_params.py --N 1000``` where N = 10x the number of skymaps wanted since depending on the detector settings, only about 1/10 of the injections will generate skymaps. This will create a csv file with the name `inj_parameters_{N}.csv` using parameters from the file `BBH_15_parameters_O4_prior.json` and distance and sky location from `2700_GW_sources.csv` which has GW sources up to 2700 Mpc (lum_dist)
 2. Run `generating_skymaps-v2.py` with a command like ```python generating_skymaps-v2.py --input_file inj_parameters_100.csv --n_skymaps 100 --foldername 100_maps --psdname test_high``` using the csv from the previous step. This will create n_skymaps number of skymaps in the folder named in the command which is inside the folder `/skymaps/`. Each skymap will be a fits file named based on the event number assigned in the previous step and the psd used by Bayestar.
 3. Run `flatten_skymaps.py` with a command like ```python flatten_skymaps.py --mapdir ./100_maps --nside 64``` using the directory of skymaps from the previous step. This will create skymaps with a fixed pixel size that will be used for the sampling steps.
 ## Sampling method
